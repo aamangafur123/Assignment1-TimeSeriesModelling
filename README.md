@@ -1,0 +1,2 @@
+# TimeSeriesModelling
+for class
