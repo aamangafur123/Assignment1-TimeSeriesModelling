@@ -1,0 +1,129 @@
+---
+title: "Importing and Playing with Excel File in R"
+author: "Aaman Gafur"
+date: "2025-02-03"
+output: html_document
+---
+
+```{r}
+
+Typical_Employee_Survey_Data <- read.csv("/Users/aamangafur/Downloads/Typical_Employee_Survey_Data.csv",header = FALSE)
+
+#Question 1
+
+colnames(Typical_Employee_Survey_Data) <- c("Age", "Gender", "Satisfaction", "Characteristics", "YearsWorked", "PromotionChance","DecisionMaking", "BudgetDecisions","ProudnessLevel", "TurndownCompetitors", "CoworkerRelations")
+
+str(Typical_Employee_Survey_Data)
+
+#Question 2
+
+summary(Typical_Employee_Survey_Data$Age)
+boxplot(Typical_Employee_Survey_Data$Age)
+
+summary(Typical_Employee_Survey_Data$Gender)
+boxplot(Typical_Employee_Survey_Data$Gender)
+
+summary(Typical_Employee_Survey_Data$Satisfaction)
+boxplot(Typical_Employee_Survey_Data$Satisfaction)
+
+summary(Typical_Employee_Survey_Data$Characteristics)
+boxplot(Typical_Employee_Survey_Data$Characteristics)
+
+summary(Typical_Employee_Survey_Data$YearsWorked)
+boxplot(Typical_Employee_Survey_Data$YearsWorked)
+
+summary(Typical_Employee_Survey_Data$PromotionChance)
+boxplot(Typical_Employee_Survey_Data$PromotionChance)
+
+summary(Typical_Employee_Survey_Data$DecisionMaking)
+boxplot(Typical_Employee_Survey_Data$DecisionMaking)
+
+summary(Typical_Employee_Survey_Data$BudgetDecisions)
+boxplot(Typical_Employee_Survey_Data$BudgetDecisions)
+
+summary(Typical_Employee_Survey_Data$ProudnessLevel)
+boxplot(Typical_Employee_Survey_Data$ProudnessLevel)
+
+summary(Typical_Employee_Survey_Data$TurndownCompetitors)
+boxplot(Typical_Employee_Survey_Data$TurndownCompetitors)
+
+summary(Typical_Employee_Survey_Data$CoworkerRelations)
+boxplot(Typical_Employee_Survey_Data$CoworkerRelations)
+
+#Question 3
+
+Typical_Employee_Survey_Data$Gender <- factor(Typical_Employee_Survey_Data$Gender,labels = c("Male", "Female"))
+
+Typical_Employee_Survey_Data$Satisfaction <- factor(Typical_Employee_Survey_Data$Satisfaction,levels = c(1,2,3,4), labels = c("Very Satisfied", "Moderately Satisfied", "A Little Dissatisfied", "Very Dissatisfied"))
+
+Typical_Employee_Survey_Data$Characteristics <- factor(Typical_Employee_Survey_Data$Characteristics,levels = c(1,2,3,4,5), labels = c("High Income", "No Danger of Being Fired", "Flexible Hours", "Opportunities for Advancement", "Enjoying the Work"))
+
+Typical_Employee_Survey_Data$PromotionChance <- factor(Typical_Employee_Survey_Data$PromotionChance,levels = c(1,2,3,4,5), labels = c("Very Likely", "Likely", "Not Sure", "Unlikely", "Very Unlikely"))
+
+Typical_Employee_Survey_Data$DecisionMaking <- factor(Typical_Employee_Survey_Data$DecisionMaking,levels = c(1,2,3,4), labels = c("Always", "Much of the Time", "Sometimes", "Never"))
+
+Typical_Employee_Survey_Data$BudgetDecisions <- factor(Typical_Employee_Survey_Data$BudgetDecisions,levels = c(1,2), labels = c("Yes", "No"))
+
+
+Typical_Employee_Survey_Data$ProudnessLevel <- factor(Typical_Employee_Survey_Data$ProudnessLevel,levels = c(1,2,3,4), labels = c("Very Proud", "Somewhat Proud", "Indifferent", "Not At All Proud"))
+
+Typical_Employee_Survey_Data$TurndownCompetitors <- factor(Typical_Employee_Survey_Data$TurndownCompetitors,levels = c(1,2,3,4,5), labels = c("Very Likely", "Likely", "Not Sure", "Unlikely", "Very Unlikely"))
+
+
+Typical_Employee_Survey_Data$CoworkerRelations <- factor(Typical_Employee_Survey_Data$CoworkerRelations,levels = c(1,2,3,4,5), labels = c("Very Good", "Good", "So So", "Bad", "Very Bad"))
+
+
+#Question 4
+
+#We can see that the highest number of employees fall between the ages of 30 and 40, showing that most are middle aged. 
+hist(Typical_Employee_Survey_Data$Age, main = "Ages of Employees", xlab = "Age Range", ylab = "Number of People", col = "Blue")
+
+#There are more males than females in the workplace, indicating an imbalance.
+
+plot(Typical_Employee_Survey_Data$Gender, col = "wheat")
+
+#This graph shows us that most employees have high levels of satisfaction at the workplace, indicating a positive attitude towards the job.
+
+plot(Typical_Employee_Survey_Data$Satisfaction, col = "slategray")
+
+#This graph shows that most employees prioritize work enjoyment over their pay.
+
+plot(Typical_Employee_Survey_Data$Characteristics, col = "Pink")
+
+#Most People have worked at the company for less than 10 years, indicating that most leave as they get older.
+
+hist(Typical_Employee_Survey_Data$YearsWorked, main = "Employee Years Worked", xlab = "Years Worked", col = "Orange")
+
+#Most People believe that their chance of promotion is unlikely, which shows there may not be chances of promotion at the company.
+
+barplot(table(Typical_Employee_Survey_Data$PromotionChance), main = "Chance of Promotion", col = "red", ylab = "Number of Employees", xlab = "Likeliness")
+
+#Most employees are most of the time or sometimes involved in making decisions, showing inconsistent opportunities among employees.
+
+barplot(table(Typical_Employee_Survey_Data$DecisionMaking), main = "Decision Making", col = "blue", ylab = "Number of Employees", xlab = "How Often")
+
+#There is a high split between employees that do and do not make budgeting decisions, but most employees do.
+
+barplot(table(Typical_Employee_Survey_Data$BudgetDecisions), main = "Making Budget Decisions", col = "green", ylab = "Number of Employees", xlab = "Do You Make Decisions?")
+
+# Most employees are very or somewhat proud of their work, showing an overall positive attitude towards the company.
+
+barplot(table(Typical_Employee_Survey_Data$ProudnessLevel), main = "Proudness Level", col = "Orange", ylab = "Number of Employees", xlab = "Level of Proudness")
+
+#Most employees would leave the company for higher pay, indicating that the company may need to improve on certain aspects that increase employee retention.
+
+barplot(table(Typical_Employee_Survey_Data$TurndownCompetitors), main = "Chance of Turning Down Competitors", col = "Purple", ylab = "Number of Employees", xlab = "Are You Staying With the Company?")
+
+#Most employees have good relationships with their colleagues, indicating that there is a positive culture in the workplace and company. 
+
+barplot(table(Typical_Employee_Survey_Data$CoworkerRelations), main = "Coworker Relations", col = "Yellow", ylab = "Number of Employees", xlab = "Relationship with Coworkers")
+
+
+#Question 5
+#Most emplopyees are satisfied with their work no matter how long they have been at the company.
+
+plot(Typical_Employee_Survey_Data$YearsWorked, Typical_Employee_Survey_Data$Satisfaction, main = "Years Worked vs Employee Satisfaction", xlab = "Years Worked", ylab = "Level of Satisfaction", col = "Red")
+
+```
+
+
